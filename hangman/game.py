@@ -18,3 +18,26 @@ class HangmanGame:
             else:
                 masked.append(ch)
         return "".join(masked)
+
+    def guess(self, letter: str) -> bool:
+        if letter is None or not isinstance(letter, str) or len(letter) != 1 or not letter.isalpha():
+            raise ValueError("letter must be a single alphabetic character")
+
+        letter = letter.lower()
+
+        if letter in self.correct_guesses or letter in self.missed_guesses:
+            return False
+
+        if letter in self.secret_word:
+            self.correct_guesses.add(letter)
+            return True
+
+        self.missed_guesses.add(letter)
+        return False
+
+    def is_won(self) -> bool:
+        needed = {ch for ch in self.secret_word if ch.isalpha()}
+        return needed.issubset(self.correct_guesses)
+
+    def is_lost(self) -> bool:
+        return len(self.missed_guesses) >= self.max_misses
