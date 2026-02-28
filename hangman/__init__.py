@@ -1,0 +1,1 @@
+"""Minimal hangman package (stub)."""
