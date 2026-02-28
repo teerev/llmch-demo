@@ -7,7 +7,37 @@ Implementations are intentionally minimal per the work order.
 from __future__ import annotations
 
 from dataclasses import dataclass
+import random
 from typing import List, Optional
+
+
+# Multiset: 1-10 twice each, plus 25, 50, 75, 100
+NUMBER_POOL: List[int] = [
+    1,
+    1,
+    2,
+    2,
+    3,
+    3,
+    4,
+    4,
+    5,
+    5,
+    6,
+    6,
+    7,
+    7,
+    8,
+    8,
+    9,
+    9,
+    10,
+    10,
+    25,
+    50,
+    75,
+    100,
+]
 
 
 @dataclass(frozen=True)
@@ -22,10 +52,13 @@ def generate_game(seed: Optional[int] = None) -> GameState:
     Args:
         seed: Optional seed for deterministic generation.
 
-    Raises:
-        NotImplementedError: Generation is not implemented yet.
+    Returns:
+        A deterministically generated :class:`GameState` when seed is provided.
     """
-    raise NotImplementedError
+    rng = random.Random(seed)
+    numbers = rng.sample(NUMBER_POOL, 6)
+    target = rng.randint(100, 999)
+    return GameState(numbers, target)
 
 
 def solve_numbers(numbers: List[int], target: int, max_solutions: int = 1) -> List[object]:
