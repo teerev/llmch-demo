@@ -7,6 +7,7 @@ from .constants import BOARD_SIZE, RACK_SIZE, LETTER_SCORES, STANDARD_DISTRIBUTI
 from .board import Board
 from .bag import TileBag
 from .player import Player
+from .game import Game
 
 __all__ = [
     "BOARD_SIZE",
@@ -16,4 +17,5 @@ __all__ = [
     "Board",
     "TileBag",
     "Player",
+    "Game",
 ]
