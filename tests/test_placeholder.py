@@ -1,4 +1,5 @@
 import inspect
+import math
 
 from mlp_classifier import MLPClassifier
 
@@ -62,3 +63,31 @@ def test_hidden_sizes_must_be_single_layer():
         assert False, "Expected ValueError for multi-layer hidden_sizes"
     except ValueError:
         pass
+
+
+def _cross_entropy_loss(probs, y):
+    eps = 1e-15
+    total = 0.0
+    for p, yi in zip(probs, y):
+        pi = max(eps, min(1.0 - eps, p[int(yi)]))
+        total += -math.log(pi)
+    return total / max(1, len(y))
+
+
+def test_train_reduces_cross_entropy_loss_on_tiny_dataset():
+    # Simple linearly separable-ish dataset
+    X = [
+        [0.0, 0.0],
+        [0.0, 1.0],
+        [1.0, 0.0],
+        [1.0, 1.0],
+    ]
+    y = [0, 0, 1, 1]
+
+    clf = MLPClassifier(input_size=2, hidden_sizes=[4], output_size=2, seed=42)
+
+    loss_before = _cross_entropy_loss(clf.predict_proba(X), y)
+    clf.train(X, y, epochs=200, lr=0.5)
+    loss_after = _cross_entropy_loss(clf.predict_proba(X), y)
+
+    assert loss_after < loss_before
