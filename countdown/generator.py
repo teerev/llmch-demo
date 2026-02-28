@@ -1,3 +1,6 @@
+import random
+
+
 def generate_numbers(
     count=6,
     min_value=1,
@@ -10,4 +13,10 @@ def generate_numbers(
 
     Contract is frozen by work order; implementation to be provided later.
     """
-    raise NotImplementedError
+    if rng is None:
+        rng = random.Random()
+
+    numbers = [rng.randint(min_value, max_value) for _ in range(count)]
+    target = rng.randint(target_min, target_max)
+
+    return {"numbers": numbers, "target": target}
