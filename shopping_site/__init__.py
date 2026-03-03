@@ -1,0 +1,1 @@
+"""Minimal shopping site package."""
