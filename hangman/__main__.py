@@ -1,5 +1,10 @@
+from __future__ import annotations
+
+from hangman import cli
+
+
 def main() -> None:
-    print("hangman: stub entry point")
+    cli.main()
     return None
 
 
