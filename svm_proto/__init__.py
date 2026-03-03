@@ -1,3 +1,4 @@
 """svm_proto package."""
 __version__ = "0.1.0"
-__all__ = []
+from .svm import LinearSVM
+__all__ = ["LinearSVM"]
