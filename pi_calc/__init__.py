@@ -1,6 +1,9 @@
 """pi_calc package.
 
-This package is a placeholder for future pi calculation utilities.
+Public API:
+- compute_pi(digits): return pi to the requested significant digits as a string.
 """
 
-__all__ = []
+from .core import compute_pi
+
+__all__ = ["compute_pi"]
