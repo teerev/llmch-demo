@@ -10,6 +10,7 @@ def build_output(iterations: int) -> list[str]:
     for i in range(1, iterations + 1):
         lines.append(f"[INFO] Starting task {i}")
         lines.append("Progress: [#####-----] 50%")
+        lines.append("CPU Usage: 99%")
     lines.append("All tasks complete.")
     return lines
 

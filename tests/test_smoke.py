@@ -10,4 +10,7 @@ def test_build_output_smoke() -> None:
     assert "[INFO] Starting task 2" in out
     assert "Progress: [#####-----] 50%" in out
 
+    # Dramatic CPU usage line after each progress line
+    assert out.count("CPU Usage: 99%") == 2
+
     assert out[-1].endswith("All tasks complete.")
