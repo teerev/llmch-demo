@@ -1,3 +1,7 @@
 __version__ = '0.1.0'
 
-__all__ = []
+from .model import MLP
+
+__all__ = [
+    'MLP',
+]
