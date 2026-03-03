@@ -6,6 +6,26 @@ class LinearSVM:
         self.weights = None
         self.bias = 0.0
 
+    def to_dict(self):
+        return {
+            "weights": list(self.weights) if self.weights is not None else [],
+            "bias": float(self.bias),
+            "learning_rate": float(self.learning_rate),
+            "epochs": int(self.epochs),
+            "C": float(self.C),
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        model = cls(
+            learning_rate=data.get("learning_rate", 0.01),
+            epochs=data.get("epochs", 1000),
+            C=data.get("C", 1.0),
+        )
+        model.weights = list(data["weights"])
+        model.bias = data["bias"]
+        return model
+
     def fit(self, X, y):
         if not X:
             raise ValueError("X must be a non-empty list of feature lists")
