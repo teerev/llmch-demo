@@ -2,12 +2,16 @@ from __future__ import annotations
 
 import argparse
 import time
-from typing import List, Optional
+from typing import Optional
 
 
 def build_output(iterations: int) -> list[str]:
-    # Deterministic placeholder output; iterations is accepted for future expansion.
-    return ["Pretending to work hard...", "All tasks complete."]
+    lines: list[str] = ["Pretending to work hard..."]
+    for i in range(1, iterations + 1):
+        lines.append(f"[INFO] Starting task {i}")
+        lines.append("Progress: [#####-----] 50%")
+    lines.append("All tasks complete.")
+    return lines
 
 
 def run(args: Optional[list[str]] = None) -> int:
